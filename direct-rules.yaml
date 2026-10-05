@@ -1,0 +1,43 @@
+# Clash Verge Rev 高流量/CDN 防漏直连规则
+# 适用于 Fake-IP 模式下，防止国内高频网站和 CDN 缓存消耗代理流量。
+
+prepend:
+  # === Bilibili 直连 ===
+  - 'DOMAIN-SUFFIX,hdslb.com,DIRECT'
+  - 'DOMAIN-SUFFIX,biliapi.net,DIRECT'
+  - 'DOMAIN-SUFFIX,biliapi.com,DIRECT'
+  - 'DOMAIN-SUFFIX,bilivideo.cn,DIRECT'
+  - 'DOMAIN-SUFFIX,acgvideo.com,DIRECT'
+  - 'DOMAIN-KEYWORD,bilibili,DIRECT'
+
+  # === 国内高流量/CDN防漏直连 ===
+  - 'DOMAIN-SUFFIX,douyinvod.com,DIRECT'      # 抖音/网页版视频流
+  - 'DOMAIN-SUFFIX,ixigua.com,DIRECT'         # 西瓜视频
+  - 'DOMAIN-SUFFIX,snssdk.com,DIRECT'         # 字节跳动通用
+  - 'DOMAIN-SUFFIX,amemv.com,DIRECT'          # 抖音/字节通用
+  - 'DOMAIN-SUFFIX,pstatp.com,DIRECT'         # 字节静态资源
+  - 'DOMAIN-SUFFIX,douyin.com,DIRECT'         # 抖音主站
+  - 'DOMAIN-KEYWORD,douyin,DIRECT'            # 抖音泛匹配
+  
+  - 'DOMAIN-SUFFIX,qq.com,DIRECT'             # 腾讯主站
+  - 'DOMAIN-SUFFIX,qpic.cn,DIRECT'            # 微信/QQ 图片与朋友圈
+  - 'DOMAIN-SUFFIX,servicewechat.com,DIRECT'  # 微信小程序服务
+  - 'DOMAIN-SUFFIX,v.qq.com,DIRECT'           # 腾讯视频
+  - 'DOMAIN-SUFFIX,gtimg.com,DIRECT'          # 腾讯静态资源
+  
+  - 'DOMAIN-SUFFIX,aliyundrive.com,DIRECT'    # 阿里云盘
+  - 'DOMAIN-SUFFIX,aliyundrive.net,DIRECT'    # 阿里云盘 CDN
+  - 'DOMAIN-SUFFIX,alicloudccp.com,DIRECT'    # 阿里云盘开放平台
+  - 'DOMAIN-SUFFIX,quark.cn,DIRECT'           # 夸克网盘
+  - 'DOMAIN-SUFFIX,sandai.net,DIRECT'         # 迅雷 CDN
+  - 'DOMAIN-SUFFIX,xunlei.com,DIRECT'         # 迅雷主站
+  
+  - 'DOMAIN-SUFFIX,iqiyi.com,DIRECT'          # 爱奇艺
+  - 'DOMAIN-SUFFIX,71edge.com,DIRECT'         # 爱奇艺 CDN
+  - 'DOMAIN-SUFFIX,qy.net,DIRECT'             # 爱奇艺通用
+  - 'DOMAIN-KEYWORD,iqiyi,DIRECT'             # 爱奇艺泛匹配
+  
+  - 'DOMAIN-SUFFIX,sinaimg.cn,DIRECT'         # 新浪/微博图片 CDN
+  - 'DOMAIN-SUFFIX,weibo.com,DIRECT'          # 微博主站
+  
+  - 'DOMAIN-SUFFIX,steamcontent.com,DIRECT'   # Steam 游戏下载 CDN
