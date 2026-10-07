@@ -1,14 +1,15 @@
-# 为 Gemini 单独建立的分流策略组 (全网通用版)
-# 使用正则动态抓取，无论任何机场都不会报错崩溃
+# 为 AI 核心服务单独建立的分流策略组 (全网通用版)
+# 专为 ChatGPT, Claude, Gemini 优化，严格剔除香港等易受风控地区
 
 prepend:
   - name: 🤖AI模型专线
     type: select
     include-all: true
-    filter: "(?i)(美|日|韩|新|US|JP|KR|SG|HK|香港|台|TW)"
-    # 【致命修复】加入 GLOBAL 垫底，防止极端机场一个节点都抓不到导致 0 节点引擎崩溃
+    # 严格限制为美、日、韩、新、英、德等 AI 友好地区，彻底移除 HK/TW 防止 ChatGPT 封号
+    filter: "(?i)(美|日|韩|新|英|德|US|JP|KR|SG|UK|DE)"
+    # 【修复致命 Bug】内置 GLOBAL 会导致 Mihomo 崩溃，正确的默认回落节点必须是 DIRECT
     proxies:
-      - GLOBAL
+      - DIRECT
 
 append: []
 delete: []

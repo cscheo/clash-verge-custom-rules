@@ -6,9 +6,9 @@ prepend:
   # 注意：所有海外核心服务已绑定到动态通用的 🤖AI模型专线，彻底解耦特定机场的 "AI云边" 等硬编码
   - 'DOMAIN-SUFFIX,stripe.com,🤖AI模型专线'
   - 'DOMAIN-SUFFIX,auth0.com,🤖AI模型专线'
-  - 'DOMAIN-SUFFIX,challenges.cloudflare.com,🤖AI模型专线'
-  - 'DOMAIN-SUFFIX,sentry.io,🤖AI模型专线'
-  - 'DOMAIN,static.cloudflareinsights.com,🤖AI模型专线'
+  # - 'DOMAIN-SUFFIX,challenges.cloudflare.com,🤖AI模型专线' # 警告：Cloudflare 验证码必须与主站 IP 保持一致，否则会无限死循环
+  # - 'DOMAIN-SUFFIX,sentry.io,🤖AI模型专线' # 警告：无需将全局日志收集路由到高价值节点，浪费资源且造成隐私泄漏
+  # - 'DOMAIN,static.cloudflareinsights.com,🤖AI模型专线'
 
   # === 2. 高频精确直连匹配 (O(1)查询极速响应) ===
   # -- Bilibili --
@@ -79,13 +79,15 @@ prepend:
   - 'DOMAIN-SUFFIX,geminiweb-pa.clients6.google.com,🤖AI模型专线'
   - 'DOMAIN-SUFFIX,aisandbox-pa.clients6.google.com,🤖AI模型专线'
   - 'DOMAIN-SUFFIX,waa-pa.clients6.google.com,🤖AI模型专线'
-  - 'DOMAIN-SUFFIX,clients6.google.com,🤖AI模型专线'
   - 'DOMAIN-SUFFIX,deepmind.google,🤖AI模型专线'
   - 'DOMAIN-SUFFIX,deepmind.com,🤖AI模型专线'
   - 'DOMAIN,aistudio.google.com,🤖AI模型专线'
   - 'DOMAIN,makersuite.google.com,🤖AI模型专线'
   - 'DOMAIN,ai.google.dev,🤖AI模型专线'
-  - 'DOMAIN-SUFFIX,apis.google.com,🤖AI模型专线'
+
+  # 移除泛域名劫持，防止 Google Maps/Drive 等常规服务被强制路由到高延迟节点
+  # - 'DOMAIN-SUFFIX,apis.google.com,🤖AI模型专线'
+  # - 'DOMAIN-SUFFIX,clients6.google.com,🤖AI模型专线'
 
 append: []
 delete: []
