@@ -10,7 +10,14 @@ prepend:
   - 'DOMAIN-SUFFIX,acgvideo.com,DIRECT'
   - 'DOMAIN-KEYWORD,bilibili,DIRECT'
 
+  # === 修复机场 ChatGPT 规则滥杀公共域名 (防验证码死循环/支付风控) ===
+  - 'DOMAIN-SUFFIX,stripe.com,AI云边'
+  - 'DOMAIN-SUFFIX,auth0.com,AI云边'
+  - 'DOMAIN-SUFFIX,challenges.cloudflare.com,AI云边'
+  - 'DOMAIN-SUFFIX,sentry.io,AI云边'
+  - 'DOMAIN,static.cloudflareinsights.com,AI云边'
   # === 国内高流量/CDN防漏直连 ===
+  - 'GEOSITE,cn,DIRECT'
   - 'DOMAIN-SUFFIX,douyinvod.com,DIRECT'      # 抖音/网页版视频流
   - 'DOMAIN-SUFFIX,ixigua.com,DIRECT'         # 西瓜视频
   - 'DOMAIN-SUFFIX,snssdk.com,DIRECT'         # 字节跳动通用
