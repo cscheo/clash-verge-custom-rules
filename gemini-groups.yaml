@@ -6,9 +6,9 @@ prepend:
     type: select
     include-all: true
     filter: "(?i)(美|日|韩|新|US|JP|KR|SG|HK|香港|台|TW)"
+    # 【致命修复】加入 GLOBAL 垫底，防止极端机场一个节点都抓不到导致 0 节点引擎崩溃
+    proxies:
+      - GLOBAL
 
 append: []
-
-# 注：此处的 delete: 冗余策略组逻辑已移交至 remove-fallback.js，
-# 使用纯 JS 控制可以保证彻底的悬空规则清洗，防止启动崩溃。
 delete: []

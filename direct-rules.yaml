@@ -3,11 +3,12 @@
 
 prepend:
   # === 1. 最高优先级：修复机场 ChatGPT 滥杀公共域名 (防验证码死循环/支付风控) ===
-  - 'DOMAIN-SUFFIX,stripe.com,AI云边'
-  - 'DOMAIN-SUFFIX,auth0.com,AI云边'
-  - 'DOMAIN-SUFFIX,challenges.cloudflare.com,AI云边'
-  - 'DOMAIN-SUFFIX,sentry.io,AI云边'
-  - 'DOMAIN,static.cloudflareinsights.com,AI云边'
+  # 注意：所有海外核心服务已绑定到动态通用的 ♊Gemini，彻底解耦特定机场的 "AI云边" 等硬编码
+  - 'DOMAIN-SUFFIX,stripe.com,♊Gemini'
+  - 'DOMAIN-SUFFIX,auth0.com,♊Gemini'
+  - 'DOMAIN-SUFFIX,challenges.cloudflare.com,♊Gemini'
+  - 'DOMAIN-SUFFIX,sentry.io,♊Gemini'
+  - 'DOMAIN,static.cloudflareinsights.com,♊Gemini'
 
   # === 2. 高频精确直连匹配 (O(1)查询极速响应) ===
   # -- Bilibili --

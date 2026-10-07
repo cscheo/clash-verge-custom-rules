@@ -32,23 +32,21 @@ function main(config, profileName) {
   });
   config["proxy-groups"] = config["proxy-groups"].filter(g => !groupsToRemove.includes(g.name));
 
-  // 4. 【核心防御】深度清洗 rules 路由规则，解决悬空指针导致启动崩溃的问题
+  // 正则转义函数，防止目标组名字含有特殊字符 (如 "🔯故障转移(Auto)") 破坏正则
+  function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  // 4. 【致命修复】放弃粗暴的逗号 split，改用尾部精准正则替换，完美兼容逻辑规则 AND,(...),Proxy
   if (config.rules && Array.isArray(config.rules)) {
     config.rules = config.rules.map(rule => {
-      let parts = rule.split(",");
-      
-      // 常见规则 (如 DOMAIN-SUFFIX,google.com,自动选择)
-      if (parts.length >= 3) {
-        if (groupsToRemove.includes(parts[2])) {
-          parts[2] = safeProxy; 
-          return parts.join(",");
-        }
-      } 
-      // MATCH 规则 (如 MATCH,故障转移)
-      else if (parts.length === 2 && parts[0] === "MATCH") {
-        if (groupsToRemove.includes(parts[1])) {
-          parts[1] = safeProxy;
-          return parts.join(",");
+      for (const target of groupsToRemove) {
+        const escapedTarget = escapeRegExp(target);
+        // 匹配逗号后的目标组名，且它必须在句尾，或者紧跟着逗号 (如 ,no-resolve)
+        const regex = new RegExp(`,${escapedTarget}(,|$)`);
+        if (regex.test(rule)) {
+          // 安全替换为接盘组，保留后面的附加参数 ($1)
+          return rule.replace(regex, `,${safeProxy}$1`);
         }
       }
       return rule;
