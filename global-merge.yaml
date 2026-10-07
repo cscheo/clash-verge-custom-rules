@@ -1,0 +1,8 @@
+# Clash Verge 全局基础扩展配置 (Global Merge)
+# 作用于所有机场，提供底层稳定性优化
+
+profile:
+  store-selected: true      # 记住用户手动选择的节点，重启或更新订阅不重置
+
+dns:
+  use-system-hosts: false   # 绕过系统 hosts，防止污染和代理异常

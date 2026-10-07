@@ -1,16 +1,28 @@
 # Clash Verge Rev 规则增强 (前置规则)
-# 包含：国内高流量防漏直连、B站/优酷/爱奇艺/抖音直连、ChatGPT防风控、Gemini全量分流
+# 架构优化版：高频精确匹配置顶 (O(1)级查询)，全网范围兜底置后
 
 prepend:
-  # === 修复机场 ChatGPT 规则滥杀公共域名 (防验证码死循环/支付风控) ===
+  # === 1. 最高优先级：修复机场 ChatGPT 滥杀公共域名 (防验证码死循环/支付风控) ===
   - 'DOMAIN-SUFFIX,stripe.com,AI云边'
   - 'DOMAIN-SUFFIX,auth0.com,AI云边'
   - 'DOMAIN-SUFFIX,challenges.cloudflare.com,AI云边'
   - 'DOMAIN-SUFFIX,sentry.io,AI云边'
   - 'DOMAIN,static.cloudflareinsights.com,AI云边'
-  
-  # === 国内高流量/CDN防漏直连 ===
-  - 'GEOSITE,cn,DIRECT'
+
+  # === 2. 高频精确直连匹配 (O(1)查询极速响应) ===
+  # -- Bilibili --
+  - 'DOMAIN-SUFFIX,hdslb.com,DIRECT'
+  - 'DOMAIN-SUFFIX,biliapi.net,DIRECT'
+  - 'DOMAIN-SUFFIX,biliapi.com,DIRECT'
+  - 'DOMAIN-SUFFIX,bilivideo.cn,DIRECT'
+  - 'DOMAIN-SUFFIX,acgvideo.com,DIRECT'
+  - 'DOMAIN-KEYWORD,bilibili,DIRECT'
+  # -- 优酷/土豆 --
+  - 'DOMAIN-SUFFIX,youku.com,DIRECT'
+  - 'DOMAIN-SUFFIX,ykimg.com,DIRECT'
+  - 'DOMAIN-SUFFIX,tudou.com,DIRECT'
+  - 'DOMAIN-KEYWORD,youku,DIRECT'
+  # -- 抖音/字节跳动 --
   - 'DOMAIN-SUFFIX,douyinvod.com,DIRECT'
   - 'DOMAIN-SUFFIX,ixigua.com,DIRECT'
   - 'DOMAIN-SUFFIX,snssdk.com,DIRECT'
@@ -18,40 +30,33 @@ prepend:
   - 'DOMAIN-SUFFIX,pstatp.com,DIRECT'
   - 'DOMAIN-SUFFIX,douyin.com,DIRECT'
   - 'DOMAIN-KEYWORD,douyin,DIRECT'
+  # -- 爱奇艺 --
+  - 'DOMAIN-SUFFIX,iqiyi.com,DIRECT'
+  - 'DOMAIN-SUFFIX,71edge.com,DIRECT'
+  - 'DOMAIN-SUFFIX,qy.net,DIRECT'
+  - 'DOMAIN-KEYWORD,iqiyi,DIRECT'
+  # -- 腾讯/微信 --
   - 'DOMAIN-SUFFIX,qq.com,DIRECT'
   - 'DOMAIN-SUFFIX,qpic.cn,DIRECT'
   - 'DOMAIN-SUFFIX,servicewechat.com,DIRECT'
   - 'DOMAIN-SUFFIX,v.qq.com,DIRECT'
   - 'DOMAIN-SUFFIX,gtimg.com,DIRECT'
+  # -- 云盘与下载 --
   - 'DOMAIN-SUFFIX,aliyundrive.com,DIRECT'
   - 'DOMAIN-SUFFIX,aliyundrive.net,DIRECT'
   - 'DOMAIN-SUFFIX,alicloudccp.com,DIRECT'
   - 'DOMAIN-SUFFIX,quark.cn,DIRECT'
   - 'DOMAIN-SUFFIX,sandai.net,DIRECT'
   - 'DOMAIN-SUFFIX,xunlei.com,DIRECT'
-  - 'DOMAIN-SUFFIX,iqiyi.com,DIRECT'
-  - 'DOMAIN-SUFFIX,71edge.com,DIRECT'
-  - 'DOMAIN-SUFFIX,qy.net,DIRECT'
-  - 'DOMAIN-KEYWORD,iqiyi,DIRECT'
+  - 'DOMAIN-SUFFIX,steamcontent.com,DIRECT'
+  # -- 微博/图片CDN --
   - 'DOMAIN-SUFFIX,sinaimg.cn,DIRECT'
   - 'DOMAIN-SUFFIX,weibo.com,DIRECT'
-  - 'DOMAIN-SUFFIX,steamcontent.com,DIRECT'
-  
-  # === Bilibili 直连 ===
-  - 'DOMAIN-SUFFIX,hdslb.com,DIRECT'
-  - 'DOMAIN-SUFFIX,biliapi.net,DIRECT'
-  - 'DOMAIN-SUFFIX,biliapi.com,DIRECT'
-  - 'DOMAIN-SUFFIX,bilivideo.cn,DIRECT'
-  - 'DOMAIN-SUFFIX,acgvideo.com,DIRECT'
-  - 'DOMAIN-KEYWORD,bilibili,DIRECT'
 
-  # === 优酷/土豆 直连 ===
-  - 'DOMAIN-SUFFIX,youku.com,DIRECT'
-  - 'DOMAIN-SUFFIX,ykimg.com,DIRECT'
-  - 'DOMAIN-SUFFIX,tudou.com,DIRECT'
-  - 'DOMAIN-KEYWORD,youku,DIRECT'
+  # === 3. 大范围 GEOSITE 兜底匹配 ===
+  - 'GEOSITE,cn,DIRECT'
 
-  # === Gemini / Google AI 全量专属规则 ===
+  # === 4. Gemini / Google AI 全量专属分流 ===
   - 'GEOSITE,google-gemini,♊Gemini'
   - 'GEOSITE,google-deepmind,♊Gemini'
   - 'DOMAIN-SUFFIX,gemini.google.com,♊Gemini'
