@@ -1,0 +1,25 @@
+# 为 Gemini 单独建立的分流策略组
+# 适用于 Clash Verge Rev 的 Groups (策略组) 覆写功能
+
+prepend:
+  - name: ♊Gemini
+    type: select
+    proxies:
+      - 韩国-anyt-2
+      - 韩国-hy2-2
+      - 韩国-hy2-1
+      - 新加坡-hy2-2
+      - 新加坡-hy2-1
+      - 新加坡-anyt-1
+      - 日本-anyt-1
+      - 日本-anyt-2
+      - 德国-anyt🇩🇪
+      - 法国-hy2🇫🇷
+      - 美国-hy2🇺🇸
+
+append: []
+
+# 备用方案：也可以用 yaml 的 delete 直接删掉自动选择组（和 JS 脚本选其一即可生效）
+delete: 
+  - "♻️自动选择"
+  - "🔯故障转移"

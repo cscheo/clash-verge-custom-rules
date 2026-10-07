@@ -1,7 +1,42 @@
-# Clash Verge Rev 高流量/CDN 防漏直连规则
-# 适用于 Fake-IP 模式下，防止国内高频网站和 CDN 缓存消耗代理流量。
+# Clash Verge Rev 规则增强 (前置规则)
+# 包含：国内高流量防漏直连、B站/优酷/爱奇艺/抖音直连、ChatGPT防风控、Gemini全量分流
 
 prepend:
+  # === 修复机场 ChatGPT 规则滥杀公共域名 (防验证码死循环/支付风控) ===
+  - 'DOMAIN-SUFFIX,stripe.com,AI云边'
+  - 'DOMAIN-SUFFIX,auth0.com,AI云边'
+  - 'DOMAIN-SUFFIX,challenges.cloudflare.com,AI云边'
+  - 'DOMAIN-SUFFIX,sentry.io,AI云边'
+  - 'DOMAIN,static.cloudflareinsights.com,AI云边'
+  
+  # === 国内高流量/CDN防漏直连 ===
+  - 'GEOSITE,cn,DIRECT'
+  - 'DOMAIN-SUFFIX,douyinvod.com,DIRECT'
+  - 'DOMAIN-SUFFIX,ixigua.com,DIRECT'
+  - 'DOMAIN-SUFFIX,snssdk.com,DIRECT'
+  - 'DOMAIN-SUFFIX,amemv.com,DIRECT'
+  - 'DOMAIN-SUFFIX,pstatp.com,DIRECT'
+  - 'DOMAIN-SUFFIX,douyin.com,DIRECT'
+  - 'DOMAIN-KEYWORD,douyin,DIRECT'
+  - 'DOMAIN-SUFFIX,qq.com,DIRECT'
+  - 'DOMAIN-SUFFIX,qpic.cn,DIRECT'
+  - 'DOMAIN-SUFFIX,servicewechat.com,DIRECT'
+  - 'DOMAIN-SUFFIX,v.qq.com,DIRECT'
+  - 'DOMAIN-SUFFIX,gtimg.com,DIRECT'
+  - 'DOMAIN-SUFFIX,aliyundrive.com,DIRECT'
+  - 'DOMAIN-SUFFIX,aliyundrive.net,DIRECT'
+  - 'DOMAIN-SUFFIX,alicloudccp.com,DIRECT'
+  - 'DOMAIN-SUFFIX,quark.cn,DIRECT'
+  - 'DOMAIN-SUFFIX,sandai.net,DIRECT'
+  - 'DOMAIN-SUFFIX,xunlei.com,DIRECT'
+  - 'DOMAIN-SUFFIX,iqiyi.com,DIRECT'
+  - 'DOMAIN-SUFFIX,71edge.com,DIRECT'
+  - 'DOMAIN-SUFFIX,qy.net,DIRECT'
+  - 'DOMAIN-KEYWORD,iqiyi,DIRECT'
+  - 'DOMAIN-SUFFIX,sinaimg.cn,DIRECT'
+  - 'DOMAIN-SUFFIX,weibo.com,DIRECT'
+  - 'DOMAIN-SUFFIX,steamcontent.com,DIRECT'
+  
   # === Bilibili 直连 ===
   - 'DOMAIN-SUFFIX,hdslb.com,DIRECT'
   - 'DOMAIN-SUFFIX,biliapi.net,DIRECT'
@@ -10,41 +45,41 @@ prepend:
   - 'DOMAIN-SUFFIX,acgvideo.com,DIRECT'
   - 'DOMAIN-KEYWORD,bilibili,DIRECT'
 
-  # === 修复机场 ChatGPT 规则滥杀公共域名 (防验证码死循环/支付风控) ===
-  - 'DOMAIN-SUFFIX,stripe.com,AI云边'
-  - 'DOMAIN-SUFFIX,auth0.com,AI云边'
-  - 'DOMAIN-SUFFIX,challenges.cloudflare.com,AI云边'
-  - 'DOMAIN-SUFFIX,sentry.io,AI云边'
-  - 'DOMAIN,static.cloudflareinsights.com,AI云边'
-  # === 国内高流量/CDN防漏直连 ===
-  - 'GEOSITE,cn,DIRECT'
-  - 'DOMAIN-SUFFIX,douyinvod.com,DIRECT'      # 抖音/网页版视频流
-  - 'DOMAIN-SUFFIX,ixigua.com,DIRECT'         # 西瓜视频
-  - 'DOMAIN-SUFFIX,snssdk.com,DIRECT'         # 字节跳动通用
-  - 'DOMAIN-SUFFIX,amemv.com,DIRECT'          # 抖音/字节通用
-  - 'DOMAIN-SUFFIX,pstatp.com,DIRECT'         # 字节静态资源
-  - 'DOMAIN-SUFFIX,douyin.com,DIRECT'         # 抖音主站
-  - 'DOMAIN-KEYWORD,douyin,DIRECT'            # 抖音泛匹配
-  
-  - 'DOMAIN-SUFFIX,qq.com,DIRECT'             # 腾讯主站
-  - 'DOMAIN-SUFFIX,qpic.cn,DIRECT'            # 微信/QQ 图片与朋友圈
-  - 'DOMAIN-SUFFIX,servicewechat.com,DIRECT'  # 微信小程序服务
-  - 'DOMAIN-SUFFIX,v.qq.com,DIRECT'           # 腾讯视频
-  - 'DOMAIN-SUFFIX,gtimg.com,DIRECT'          # 腾讯静态资源
-  
-  - 'DOMAIN-SUFFIX,aliyundrive.com,DIRECT'    # 阿里云盘
-  - 'DOMAIN-SUFFIX,aliyundrive.net,DIRECT'    # 阿里云盘 CDN
-  - 'DOMAIN-SUFFIX,alicloudccp.com,DIRECT'    # 阿里云盘开放平台
-  - 'DOMAIN-SUFFIX,quark.cn,DIRECT'           # 夸克网盘
-  - 'DOMAIN-SUFFIX,sandai.net,DIRECT'         # 迅雷 CDN
-  - 'DOMAIN-SUFFIX,xunlei.com,DIRECT'         # 迅雷主站
-  
-  - 'DOMAIN-SUFFIX,iqiyi.com,DIRECT'          # 爱奇艺
-  - 'DOMAIN-SUFFIX,71edge.com,DIRECT'         # 爱奇艺 CDN
-  - 'DOMAIN-SUFFIX,qy.net,DIRECT'             # 爱奇艺通用
-  - 'DOMAIN-KEYWORD,iqiyi,DIRECT'             # 爱奇艺泛匹配
-  
-  - 'DOMAIN-SUFFIX,sinaimg.cn,DIRECT'         # 新浪/微博图片 CDN
-  - 'DOMAIN-SUFFIX,weibo.com,DIRECT'          # 微博主站
-  
-  - 'DOMAIN-SUFFIX,steamcontent.com,DIRECT'   # Steam 游戏下载 CDN
+  # === 优酷/土豆 直连 ===
+  - 'DOMAIN-SUFFIX,youku.com,DIRECT'
+  - 'DOMAIN-SUFFIX,ykimg.com,DIRECT'
+  - 'DOMAIN-SUFFIX,tudou.com,DIRECT'
+  - 'DOMAIN-KEYWORD,youku,DIRECT'
+
+  # === Gemini / Google AI 全量专属规则 ===
+  - 'GEOSITE,google-gemini,♊Gemini'
+  - 'GEOSITE,google-deepmind,♊Gemini'
+  - 'DOMAIN-SUFFIX,gemini.google.com,♊Gemini'
+  - 'DOMAIN-SUFFIX,bard.google.com,♊Gemini'
+  - 'DOMAIN-SUFFIX,generativeai.google.com,♊Gemini'
+  - 'DOMAIN-SUFFIX,generativeai.google,♊Gemini'
+  - 'DOMAIN-SUFFIX,generativelanguage.googleapis.com,♊Gemini'
+  - 'DOMAIN-KEYWORD,generativelanguage,♊Gemini'
+  - 'DOMAIN-KEYWORD,cloudcode,♊Gemini'
+  - 'DOMAIN-KEYWORD,cloudaicompanion,♊Gemini'
+  - 'DOMAIN-KEYWORD,notebooklm,♊Gemini'
+  - 'DOMAIN-SUFFIX,daily-cloudcode-pa.googleapis.com,♊Gemini'
+  - 'DOMAIN-SUFFIX,cloudcode-pa.googleapis.com,♊Gemini'
+  - 'DOMAIN-SUFFIX,cloudaicompanion.googleapis.com,♊Gemini'
+  - 'DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com,♊Gemini'
+  - 'DOMAIN-SUFFIX,alkalimakersuite-pa.clients6.google.com,♊Gemini'
+  - 'DOMAIN-SUFFIX,alkalicore-pa.clients6.google.com,♊Gemini'
+  - 'DOMAIN-SUFFIX,geminiweb-pa.clients.google.com,♊Gemini'
+  - 'DOMAIN-SUFFIX,geminiweb-pa.clients6.google.com,♊Gemini'
+  - 'DOMAIN-SUFFIX,aisandbox-pa.clients6.google.com,♊Gemini'
+  - 'DOMAIN-SUFFIX,waa-pa.clients6.google.com,♊Gemini'
+  - 'DOMAIN-SUFFIX,clients6.google.com,♊Gemini'
+  - 'DOMAIN-SUFFIX,deepmind.google,♊Gemini'
+  - 'DOMAIN-SUFFIX,deepmind.com,♊Gemini'
+  - 'DOMAIN,aistudio.google.com,♊Gemini'
+  - 'DOMAIN,makersuite.google.com,♊Gemini'
+  - 'DOMAIN,ai.google.dev,♊Gemini'
+  - 'DOMAIN-SUFFIX,apis.google.com,♊Gemini'
+
+append: []
+delete: []
