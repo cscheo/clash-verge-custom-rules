@@ -2,7 +2,7 @@
 # 使用正则动态抓取，无论任何机场都不会报错崩溃
 
 prepend:
-  - name: ♊Gemini
+  - name: 🤖AI模型专线
     type: select
     include-all: true
     filter: "(?i)(美|日|韩|新|US|JP|KR|SG|HK|香港|台|TW)"
